@@ -13,4 +13,12 @@ name = "rustboy-core"
 version = "0.1.0"
 dependencies = [
  "bitflags",
+ "rustboy-debug",
+]
+
+[[package]]
+name = "rustboy-debug"
+version = "0.1.0"
+dependencies = [
+ "rustboy-core",
 ]

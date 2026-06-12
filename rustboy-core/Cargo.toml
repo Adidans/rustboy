@@ -5,3 +5,6 @@ edition = "2024"
 
 [dependencies]
 bitflags = "2.13.0"
+
+[dev-dependencies]
+rustboy-debug = { path = "../rustboy-debug" }
