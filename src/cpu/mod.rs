@@ -41,6 +41,10 @@ impl Cpu {
             Regs::E => self.e,
             Regs::H => self.h,
             Regs::L => self.l,
+            Regs::HL => {
+                let addr = self.get_r16(Regs16::HL);
+                self.read_ram(addr)
+            }
         }
     }
 
@@ -54,6 +58,10 @@ impl Cpu {
             Regs::E => self.e = val,
             Regs::H => self.h = val,
             Regs::L => self.l = val,
+            Regs::HL => {
+                let addr = self.get_r16(Regs16::HL);
+                self.write_ram(addr, val);
+            }
         }
     }
 
@@ -183,6 +191,7 @@ pub enum Regs {
     E,
     H,
     L,
+    HL,
 }
 
 #[derive(Clone, Copy)]
