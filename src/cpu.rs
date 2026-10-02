@@ -47,6 +47,29 @@ impl Cpu {
         let high = self.fetch8(bus);
         ((high as u16) << 8) | low as u16
     }
+
+    pub fn step(&mut self, bus: &mut Bus) {
+        let opcode = self.fetch8(bus);
+        let instr = decode(opcode);
+        self.execute(instr, bus);
+    }
+
+    fn execute(&mut self, instr: Instruction, bus: &mut Bus) {
+        match instr {
+            Instruction::Nop => {}
+        }
+    }
+}
+
+fn decode(opcode: u8) -> Instruction {
+    match opcode {
+        0x00 => Instruction::Nop,
+        _ => todo!(),
+    }
+}
+
+enum Instruction {
+    Nop,
 }
 
 #[cfg(test)]
@@ -82,5 +105,13 @@ mod tests {
         let res = cpu.fetch16(&bus);
         assert_eq!(res, 1234);
         assert_eq!(cpu.pc, 2);
+    }
+
+    #[test]
+    fn cpu_steps() {
+        let mut cpu = Cpu::new();
+        let mut bus = Bus::new();
+        cpu.step(&mut bus);
+        assert_eq!(cpu.pc, 1)
     }
 }
